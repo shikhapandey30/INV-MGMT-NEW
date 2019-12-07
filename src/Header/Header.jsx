@@ -42,7 +42,7 @@ class Header extends React.Component {
                       aria-haspopup="true" aria-expanded="false">
                       <i className="glyphicon glyphicon-th-list"></i>
                     </a>
-                    <div className="dropdown-menu dropdown-menu-right dropdown-default dropdown-d-color"
+                    <div className="dropdown-menu dropdown-default dropdown-d-color"
                       aria-labelledby="navbarDropdownMenuLink-333">
                       <a className="dropdown-item" href="/login">Logout</a>
                      
