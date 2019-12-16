@@ -7,6 +7,7 @@ import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
 import { WareHouseNewUser } from '../WareHousePage';
+import Loader from 'react-loader-spinner'
 
 
 class WareHouseDetail extends React.Component {
@@ -129,13 +130,23 @@ class WareHouseDetail extends React.Component {
     render() {
       const { user, warehouse, loggingIn } = this.props;
       const { submitted } = this.state;
-      const current_user = JSON.parse(localStorage.getItem('singleUser'))
+      const current_user = JSON.parse(localStorage.getItem('singleUser'));
+      
       return (
         <div>
           <Header />
           <div className="container">
             <div>
               <div className="page-header">
+                <center> 
+                  <Loader
+                   type="TailSpin"
+                   color="#00BFFF"
+                   height={100}
+                   width={100}
+                   timeout={500}
+                  />
+                </center>
                 { warehouse.items && 
                   <h1 className="page-title">
                     {warehouse.items.name}

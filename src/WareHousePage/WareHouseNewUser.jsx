@@ -23,6 +23,7 @@ class WareHouseNewUser extends React.Component {
                 warehouseAdmin: '',
                 loaded: 0
             },
+            datawarehouseuser: [],
             submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -47,19 +48,16 @@ class WareHouseNewUser extends React.Component {
       this.setState({ submitted: true });
       const { warehouse } = this.state;
       const { dispatch } = this.props;
-      var warehouseuser = {password: warehouse.password, superAdmin: warehouse.superAdmin, token: warehouse.token, userName: warehouse.userName,warehouseAdmin: warehouse.warehouseAdmin}
+      var warehouseadminuser = JSON.parse(warehouse.warehouseAdmin);
+      var warehouseuser = {password: warehouse.password, superAdmin: false, token: warehouse.token, userName: warehouse.userName,warehouseAdmin: warehouseadminuser}
        let warehouseId = this.props.warehouse.items.id;
       axios.post(`${config.apiUrl}/warehouses/${warehouseId}/users`, warehouseuser, {
       headers: headers
       })
-      .then(response => {
-        this.setState({ locations: response.data });
+      .then(result => {
+        this.setState(datawarehouseuser: result.data.data);
         window.location = "/warehouses"
       })
-    }
-
-    handleDeleteUser(id) {
-      return (e) => this.props.dispatch(userActions.delete(id));
     }
 
     render() {
@@ -72,51 +70,35 @@ class WareHouseNewUser extends React.Component {
           <div className="container">
             <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
               <div className="row">
-               <div className="col-md-6">
-                  <label htmlFor="warehousepassword" className="label">WareHouse Password</label>
+                
+                 <div className="col-md-6">
+                  <label htmlFor="warehouseuserName" className="label">User Email</label>
+                  <div>
+                    {submitted && !warehouse.userName && 
+                      <div className="help-block required-msg"> Warehouse userName is required</div>
+                    }
+                    <input type="email" id="warehouseuserName" className="form-control" placeholder="Email" name="userName" value={warehouse.userName} onChange={this.handleChange}  autoFocus />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="warehousepassword" className="label">Password</label>
                   <div>
                     {submitted && !warehouse.password && 
                       <div className="help-block required-msg"> Warehouse Password is required</div>
                     }
-                    <input type="text" id="warehousepassword" className="form-control" placeholder="WareHouse Password" name="password" value={warehouse.password} onChange={this.handleChange}  autoFocus />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <label htmlFor="warehousesuperAdmin" className="label">Super Admin</label>
-                  <div>
-                    <select value={warehouse.superAdmin} onChange={this.handleChange} name="superAdmin" className="form-control select-field" >
-                          <option key="1" value="true" >
-                           True
-                          </option>
-                          <option key="0" value="false" >
-                           False
-                          </option>
-                      </select>
+                    <input type="password" id="warehousepassword" className="form-control" placeholder="Password" name="password" value={warehouse.password} onChange={this.handleChange}  autoFocus />
                   </div>
                 </div>
               </div><br/>  
               <div className="row">
                 <input type="hidden" id="warehousetoken" className="form-control" placeholder="token" name="token" value={warehouse.token} onChange={this.handleChange}  autoFocus />
                 <div className="col-md-6">
-                  <label htmlFor="warehouseuserName" className="label">User Name</label>
-                  <div>
-                    {submitted && !warehouse.userName && 
-                      <div className="help-block required-msg"> Warehouse userName is required</div>
-                    }
-                    <input type="email" id="warehouseuserName" className="form-control" placeholder="userName" name="userName" value={warehouse.userName} onChange={this.handleChange}  autoFocus />
-                  </div>
-                </div>
-                
-                <div className="col-md-6">
                   <label htmlFor="warehousewarehouseAdmin" className="label">Warehouse Admin</label>
                   <div >
-                    <select value={warehouse.warehouseAdmin} onChange={this.handleChange} name="warehouseAdmin" className="form-control select-field" >
-                        <option key="1" value="true" >
-                         True
-                        </option>
-                        <option key="0" value="false" >
-                         False
-                        </option>
+                    <select value={warehouse.warehouseAdmin} onChange={this.handleChange} name="warehouseAdmin" className="form-control select-field">
+                      <option value="">select</option>
+                      <option value="true">True</option>
+                      <option value="false">False</option>
                     </select>
                   </div>
                 </div>

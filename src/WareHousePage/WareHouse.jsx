@@ -5,6 +5,7 @@ import { Header } from '../Header';
 import { userActions } from '../_actions';
 import { Footer } from '../Footer';
 import { NewWareHouse } from '../WareHousePage';
+import Loader from 'react-loader-spinner'
 
 class WareHouse extends React.Component {
     componentDidMount() {
@@ -14,7 +15,7 @@ class WareHouse extends React.Component {
     render() {
       const { user, allwarehouses } = this.props;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
-      console.log("allwarehouses", allwarehouses)
+      console.log("allwarehouses", allwarehouses);
       return (
         <div>
           <Header />
@@ -31,6 +32,15 @@ class WareHouse extends React.Component {
                 </h1>
               </div>
               <div className="panel filterable">
+                <center>
+                  <Loader
+                   type="Puff"
+                   color="#00BFFF"
+                   height={100}
+                   width={100}
+                   timeout={1000}
+                  />
+                </center>
                 {allwarehouses.loading && <h5 className="loading-msg"><em>Loading All Warehouses .....</em></h5>}
                 <table className="table table-hover table-responsive">
                   <thead>

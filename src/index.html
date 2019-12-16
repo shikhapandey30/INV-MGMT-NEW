@@ -30,13 +30,26 @@
       table.dataTable thead {
         cursor: pointer;
       }
-      .sorting_asc:before{
+      .sorting {
+          cursor: pointer;
+      }
+      .sorting:after {
+          content: url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIUnC2nKLnT4or00PvyrQwrPzUZshQAOw==);
+          padding-left: 1em;
+      }
+      .sorting_asc:after {
+          content: '\25B2';
+      }
+      .sorting_desc:after {
+          content: '\25BC';
+      }
+      /*.sorting_asc:before{
         content: '\25B2';
       }
 
     .sorting_desc:before{
       content: '\25BC';
-    }
+    }*/
       .autocomplete-dropdown-container{
         position: absolute;
         z-index: 9999;

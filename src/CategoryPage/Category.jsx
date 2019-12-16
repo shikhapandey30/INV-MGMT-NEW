@@ -35,15 +35,17 @@ class Category extends React.Component {
       const data = {
         columns: [
           {
+            header: 'NO',
             label: 'S No.',
             field: 'sn',
-            width: 270
+            sort: 'disabled',
+            width: 150
           },
           {
             label: 'ID',
             field: 'id',
             sort: 'asc',
-            width: 270
+            width: 150
           },
           {
             label: 'Name',
@@ -54,7 +56,7 @@ class Category extends React.Component {
           {
             label: 'View',
             field: 'view',
-            sort: 'false',
+            sort: 'disabled',
             width: 150
           },
         ],

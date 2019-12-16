@@ -15,7 +15,9 @@ class Header extends React.Component {
 
     render() {
       const { user, users} = this.props;
-      const current_user = JSON.parse(localStorage.getItem('singleUser'))
+      // const current_user = JSON.parse(localStorage.getItem('singleUser'))
+      var issuperadmin = user.data.isSuperAdmin.toString();
+      var iswarehouseadmin = user.data.isWarehouseAdmin.toString();
       console.log("users", users)
       return (
 
@@ -24,16 +26,21 @@ class Header extends React.Component {
               <div className="nav-xbootstrap" style={{zIndex:10}}>
                 <ul>
                   <li><a href="#">Dashboard</a></li>
-                  <li><a>Master<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
-                    <ul className="dropdown">
-                      <li><a href="/warehouses">Warehouse</a></li>
-                      <li><a href="/categories">Category</a></li>
-                      <li><a href="/products">Product</a></li>
-                      <li><a href="/vendors">Vendor</a></li>
-                      <li><a href="/inventories">Inventory</a></li>
+                  { issuperadmin == "true" &&
+                    <li><a>Master<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
+                      <ul className="dropdown">
+                        <li><a href="/warehouses">Warehouse</a></li>
+                        <li><a href="/categories">Category</a></li>
+                        <li><a href="/products">Product</a></li>
+                        <li><a href="/vendors">Vendor</a></li>
+                        <li><a href="/inventories">Inventory</a></li>
 
-                    </ul>
-                  </li>
+                      </ul>
+                    </li>
+                  }
+                  { iswarehouseadmin == "true" &&
+                    <li><a href="/warehouses">Warehouse</a></li>
+                  }  
                   <li><a href="/purchase-orders">Purchase Order</a></li>
                     <li><a href="/transfer-orders">Transfer Order</a></li>
                   
