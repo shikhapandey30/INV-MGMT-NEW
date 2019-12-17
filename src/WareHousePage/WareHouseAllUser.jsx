@@ -19,8 +19,14 @@ class WareHouseAllUser extends React.Component {
         error: null,
         warehouseusers: [],
         response: {}
-      }
+      };
+      this.goBack = this.goBack.bind(this);
     }
+
+    goBack(){
+      this.props.history.goBack();
+    }
+
     componentDidMount() {
     const headers = {
       'Content-Type': 'application/json',
@@ -48,7 +54,11 @@ class WareHouseAllUser extends React.Component {
           <div className="container">
             <div>
               <div className="page-header">
-                <h1 className="page-title">
+                <div className="pull-left">
+                  <button type="button" className="btn btn-primary back-btn" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                  </button>
+                </div>
+                <h1 className="page-title heading-title">
                   Warehouse Users
                 </h1>
               </div>

@@ -23,9 +23,14 @@ class ProductDetail extends React.Component {
       hsnCode:'',
       description:'',
       vendors:'',
-    }
-
+      isActive:'',
+    };
+    this.goBack = this.goBack.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  goBack(){
+    this.props.history.goBack();
   }
 
   componentWillMount(){
@@ -42,6 +47,7 @@ class ProductDetail extends React.Component {
     headers: headers
   })
     .then(response => {
+      debugger
       this.setState({
         id: response.data.data.id,
         name: response.data.data.name,
@@ -51,7 +57,8 @@ class ProductDetail extends React.Component {
         sgst: response.data.data.sgst,
         hsnCode: response.data.data.hsnCode,
         description: response.data.data.description,
-        code: response.data.data.code
+        code: response.data.data.code,
+        isActive: response.data.data.isActive
        
       }, () => {
         console.log(this.state);
@@ -143,6 +150,8 @@ class ProductDetail extends React.Component {
               <div className="page-header">
                 { product.items && 
                   <h1 className="page-title">
+                  <button type="button" className="btn btn-primary" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                  </button> &nbsp;
                     {product.items.name}
                     <div className="pull-right">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.productDelete(product.items.id)};}}>Delete</button>
@@ -200,9 +209,13 @@ class ProductDetail extends React.Component {
                         <td>Product cgst</td>
                         <td>{product.items.cgst}</td>
                       </tr>
-                       <tr>
+                      <tr>
                         <td>Product sgst</td>
                         <td>{product.items.sgst}</td>
+                      </tr>
+                      <tr>
+                        <td>Product isActive</td>
+                        <td>{product.items.isActive.toString()}</td>
                       </tr>
                     </tbody>
                   </table>

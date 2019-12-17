@@ -23,8 +23,13 @@ class Inventory extends React.Component {
           inventoryfilterdata: [],
           submitted: false
         };
+        this.goBack = this.goBack.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    goBack(){
+      this.props.history.goBack();
     }
 
     handleChange(event) {
@@ -132,7 +137,11 @@ class Inventory extends React.Component {
               <p>
                 <div>
                   <div className="page-header">
-                    <h1 className="page-title">
+                    <div className="pull-left">
+                      <button type="button" className="btn btn-primary back-btn" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                      </button>
+                    </div>
+                    <h1 className="page-title heading-title">
                       Inventories
                       <div className="pull-right">
                         <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">

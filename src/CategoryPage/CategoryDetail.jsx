@@ -15,9 +15,13 @@ class CategoryDetail extends React.Component {
     this.state = {
       id:'',
       name:'',
-    }
-
+    };
+    this.goBack = this.goBack.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  goBack(){
+    this.props.history.goBack();
   }
 
   componentWillMount(){
@@ -117,6 +121,8 @@ class CategoryDetail extends React.Component {
               <div className="page-header">
                 { category.items && 
                   <h1 className="page-title">
+                    <button type="button" className="btn btn-primary" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                    </button>&nbsp;
                     {category.items.name}
                     <div className="pull-right">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.categoryDelete(category.items.id)};}}>Delete</button>

@@ -25,7 +25,7 @@ class Header extends React.Component {
             <nav>
               <div className="nav-xbootstrap" style={{zIndex:10}}>
                 <ul>
-                  <li><a href="#">Dashboard</a></li>
+                  <li><a href="/">Dashboard</a></li>
                   { issuperadmin == "true" &&
                     <li><a>Master<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
                       <ul className="dropdown">

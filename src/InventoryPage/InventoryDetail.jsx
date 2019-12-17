@@ -25,9 +25,13 @@ class InventoryDetail extends React.Component {
       salesCost:'',
       specialCost:'',
       warehouse:'',
-    }
-
+    };
+    this.goBack = this.goBack.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  goBack(){
+    this.props.history.goBack();
   }
 
   componentWillMount(){
@@ -153,6 +157,8 @@ class InventoryDetail extends React.Component {
               <div className="page-header">
                 { inventory.items && 
                   <h1 className="page-title">
+                    <button type="button" className="btn btn-primary" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                    </button> &nbsp;
                     {inventory.items.id}
                     <div className="pull-right">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.inventoryDelete(inventory.items.id)};}}>Delete</button>

@@ -20,9 +20,13 @@ class VendorDetail extends React.Component {
       landmark:'',
       state:'',
       zipcode:'',
-    }
-
+    };
+    this.goBack = this.goBack.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  goBack(){
+    this.props.history.goBack();
   }
 
   componentWillMount(){
@@ -135,6 +139,8 @@ class VendorDetail extends React.Component {
               <div className="page-header">
                 { vendor.items && 
                   <h1 className="page-title">
+                    <button type="button" className="btn btn-primary back-btn" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                    </button> &nbsp;
                     {vendor.items.name}
                     <div className="pull-right">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.vendorDelete(vendor.items.id)};}}>Delete</button>

@@ -18,9 +18,13 @@ class PurchaseOrderDetail extends React.Component {
       status:'',
       items:'',
       vendor:'',
-    }
-
+    };
+    this.goBack = this.goBack.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  goBack(){
+    this.props.history.goBack();
   }
 
   componentWillMount(){
@@ -130,6 +134,8 @@ class PurchaseOrderDetail extends React.Component {
               <div className="page-header">
                 { purchaseorder.items && 
                   <h1 className="page-title">
+                    <button type="button" className="btn btn-primary" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                    </button> &nbsp;
                     {purchaseorder.items.id}
                     <div className="pull-right">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.purchaseorderDelete(purchaseorder.items.id)};}}>Delete</button>

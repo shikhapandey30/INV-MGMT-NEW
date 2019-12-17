@@ -20,8 +20,13 @@ class WareHouseUserDetail extends React.Component {
       error: null,
       warehouseuserdetail: '',
       response: {}
-    }
+    };
+    this.goBack = this.goBack.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  goBack(){
+    this.props.history.goBack();
   }
 
   componentWillMount(){
@@ -135,6 +140,8 @@ class WareHouseUserDetail extends React.Component {
           <div>
             <div className="page-header">
               <h1 className="page-title">
+                <button type="button" className="btn btn-primary back-btn" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </button> &nbsp;
                 {warehouseuserdetail.userName}
                 <div className="pull-right">
                   <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.warehouseuserDelete(warehouseuserdetail.id)};}}>Delete</button>

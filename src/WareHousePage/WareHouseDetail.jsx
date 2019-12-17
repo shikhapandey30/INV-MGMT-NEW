@@ -23,9 +23,13 @@ class WareHouseDetail extends React.Component {
       state:'',
       zipcode:'',
       landmark:'',
-    }
-
+    };
+    this.goBack = this.goBack.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  goBack(){
+    this.props.history.goBack();
   }
 
   componentWillMount(){
@@ -149,6 +153,8 @@ class WareHouseDetail extends React.Component {
                 </center>
                 { warehouse.items && 
                   <h1 className="page-title">
+                  <button type="button" className="btn btn-primary back-btn" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                  </button> &nbsp;
                     {warehouse.items.name}
                     <div className="pull-right">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.warehouseDelete(warehouse.items.id)};}}>Delete</button>

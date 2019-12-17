@@ -13,12 +13,51 @@
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAvuPSxdugPS2FJQibo-i78wVZHWgmKemk&libraries=places"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
-
   </head>
   <body>
     <div id="app"></div>
     <style>
+      .back-btn {margin-top: 5px;}
+      .heading-title {margin-left: 447px;}
+      .autocomplete-dropdown-container {
+        background-color: #fff;
+        position: absolute!important;
+        z-index: 1000;
+        border-radius: 2px;
+        border-top: 1px solid #d9d9d9;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        overflow: hidden;
+        color: blue !important;
+      }
+      .suggestion-item {
+        cursor: default;
+        padding: 0 4px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        line-height: 30px;
+        text-align: left;
+        border-top: 1px solid #e6e6e6;
+        font-size: 11px;
+        color: #999
+        background-color: blue !important;
+      }
+      .suggestion-item:hover {
+        background-color: #fafafa
+      }
+      .suggestion-item--active
+      {
+        background-color: #b9d6f3 !important;
+      }
+      .suggestion-item-selected,
+      .suggestion-item-selected:hover {
+        background-color: #ebf2fe
+      }
+      
       tbody + thead{
         display: none;
       }
@@ -31,25 +70,18 @@
         cursor: pointer;
       }
       .sorting {
-          cursor: pointer;
+        cursor: pointer;
       }
       .sorting:after {
-          content: url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIUnC2nKLnT4or00PvyrQwrPzUZshQAOw==);
-          padding-left: 1em;
+        content: url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIUnC2nKLnT4or00PvyrQwrPzUZshQAOw==);
+        padding-left: 1em;
       }
       .sorting_asc:after {
-          content: '\25B2';
-      }
-      .sorting_desc:after {
-          content: '\25BC';
-      }
-      /*.sorting_asc:before{
         content: '\25B2';
       }
-
-    .sorting_desc:before{
-      content: '\25BC';
-    }*/
+      .sorting_desc:after {
+        content: '\25BC';
+      }
       .autocomplete-dropdown-container{
         position: absolute;
         z-index: 9999;

@@ -8,6 +8,16 @@ import { NewProduct } from '../ProductPage';
 
 
 class Product extends React.Component {
+
+    constructor(props){
+       super(props);
+       this.goBack = this.goBack.bind(this);
+    }
+
+    goBack(){
+      this.props.history.goBack();
+    }
+
     componentDidMount() {
       this.props.dispatch(userActions.getAllproduct());
     }
@@ -22,7 +32,11 @@ class Product extends React.Component {
           <div className="container">
             <div>
               <div className="page-header">
-                <h1 className="page-title">
+                <div className="pull-left">
+                  <button type="button" className="btn btn-primary back-btn" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                  </button>
+                </div>
+                <h1 className="page-title heading-title">
                   Products
                   <div className="pull-right">
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">

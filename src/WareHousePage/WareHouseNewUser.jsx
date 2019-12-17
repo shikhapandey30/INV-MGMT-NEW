@@ -37,11 +37,10 @@ class WareHouseNewUser extends React.Component {
       });
     }
 
-
-    handleSubmit(event) {
+    handleSubmit = event => {
       const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
       }
       event.preventDefault();
       this.setState({ submitted: true });
@@ -49,13 +48,14 @@ class WareHouseNewUser extends React.Component {
       const { dispatch } = this.props;
       var warehouseadminuser = JSON.parse(warehouse.warehouseAdmin);
       var warehouseuser = {password: warehouse.password, superAdmin: false, token: warehouse.token, userName: warehouse.userName,warehouseAdmin: warehouseadminuser}
-       let warehouseId = this.props.warehouse.items.id;
-      axios.post(`${config.apiUrl}/warehouses/${warehouseId}/users`, warehouseuser, {
-      headers: headers
-      })
-      .then(result => {
-        this.setState(locations: result.data.data);
-        window.location = "/warehouses"
+      let warehouseId = this.props.warehouse.items.id;
+      axios.post(`${config.apiUrl}/warehouses/${warehouseId}/users`,warehouseuser, {headers: headers})
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        let warehouse_id = res.data.data.warehouse.id;
+        debugger
+        window.location = `/warehouse/${warehouse_id}/users`
       })
     }
 
