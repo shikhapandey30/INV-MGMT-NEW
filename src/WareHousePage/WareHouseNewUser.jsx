@@ -23,7 +23,6 @@ class WareHouseNewUser extends React.Component {
                 warehouseAdmin: '',
                 loaded: 0
             },
-            datawarehouseuser: [],
             submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -55,7 +54,7 @@ class WareHouseNewUser extends React.Component {
       headers: headers
       })
       .then(result => {
-        this.setState(datawarehouseuser: result.data.data);
+        this.setState(locations: result.data.data);
         window.location = "/warehouses"
       })
     }
