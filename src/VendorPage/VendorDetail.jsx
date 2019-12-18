@@ -7,6 +7,7 @@ import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
 import { VendorEdit } from '../VendorPage';
+import Loader from 'react-loader-spinner'
 
 class VendorDetail extends React.Component {
 
@@ -47,6 +48,15 @@ class VendorDetail extends React.Component {
         <div className="container">
           <div>
             <div className="page-header">
+                <center className="loading-msg"> 
+                  <Loader
+                   type="Oval"
+                   color="#00BFFF"
+                   height={100}
+                   width={100}
+                   timeout={500}
+                  />
+                </center>
               { vendor.items && 
                 <h1 className="page-title">
                   <button type="button" className="btn btn-primary back-btn" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back

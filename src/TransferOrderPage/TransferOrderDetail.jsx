@@ -6,6 +6,7 @@ import { userActions } from '../_actions';
 import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
+import Loader from 'react-loader-spinner'
 
 
 class TransferOrderDetail extends React.Component {
@@ -132,6 +133,15 @@ class TransferOrderDetail extends React.Component {
           <div className="container">
             <div>
               <div className="page-header">
+                  <center className="loading-msg"> 
+                    <Loader
+                     type="Oval"
+                     color="#00BFFF"
+                     height={100}
+                     width={100}
+                     timeout={500}
+                    />
+                  </center>
                   { transferorder.items && 
                     <h1 className="page-title">
                       <button type="button" className="btn btn-primary" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back

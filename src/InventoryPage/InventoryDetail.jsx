@@ -7,6 +7,7 @@ import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
 import { InventoryEdit } from '../InventoryPage';
+import Loader from 'react-loader-spinner'
 
 
 class InventoryDetail extends React.Component {
@@ -48,6 +49,15 @@ class InventoryDetail extends React.Component {
         <div className="container">
           <div>
             <div className="page-header">
+                <center className="loading-msg"> 
+                  <Loader
+                   type="Oval"
+                   color="#00BFFF"
+                   height={100}
+                   width={100}
+                   timeout={700}
+                  />
+                </center>
               { inventory.items && 
                 <h1 className="page-title">
                   <button type="button" className="btn btn-primary" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back

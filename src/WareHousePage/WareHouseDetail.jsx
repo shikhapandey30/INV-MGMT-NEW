@@ -51,13 +51,13 @@ class WareHouseDetail extends React.Component {
           <div className="container">
             <div>
               <div className="page-header">
-                <center> 
+                <center className="loading-msg"> 
                   <Loader
-                   type="TailSpin"
+                   type="Oval"
                    color="#00BFFF"
                    height={100}
                    width={100}
-                   timeout={500}
+                   timeout={700}
                   />
                 </center>
                 { warehouse.items && 
