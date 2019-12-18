@@ -7,7 +7,7 @@ import { Footer } from '../Footer';
 import { NewInventory } from '../InventoryPage';
 import axios from 'axios';
 import config from 'config';
-
+import Loader from 'react-loader-spinner'
 
 class Inventory extends React.Component {
 
@@ -101,6 +101,14 @@ class Inventory extends React.Component {
                     <div className="col-md-3">
                       <label htmlFor="filterinventoryproduct" className="label">Product</label>
                       <div>
+                      {allproducts.loading && <h5 className="loading-msg"><em>
+                        <Loader
+                         type="Oval"
+                         color="#00BFFF"
+                         height={100}
+                         width={100}
+                         timeout={1000}
+                        /></em></h5>}
                         { allproducts.items && allproducts.items.length > 0 &&
                           <select value={filterinventory.product} onChange={this.handleChange} name="product" className="form-control select-field" >
                             <option>Select Product</option>

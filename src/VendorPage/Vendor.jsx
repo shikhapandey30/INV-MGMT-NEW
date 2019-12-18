@@ -5,6 +5,7 @@ import { Header } from '../Header';
 import { userActions } from '../_actions';
 import { Footer } from '../Footer';
 import { NewVendor } from '../VendorPage';
+import Loader from 'react-loader-spinner'
 
 
 class Vendor extends React.Component {
@@ -46,7 +47,15 @@ class Vendor extends React.Component {
                 </h1>
               </div>
               <div className="panel filterable">
-                {allvendors.loading && <h5 className="loading-msg"><em>Loading All Vendors .....</em></h5>}
+                {allvendors.loading && <h5 className="loading-msg"><em>
+                  <Loader
+                   type="Oval"
+                   color="#00BFFF"
+                   height={100}
+                   width={100}
+                   timeout={1000}
+                  />
+                </em></h5>}
                 <table className="table table-hover">
                   <thead>
                     <tr className="filters">

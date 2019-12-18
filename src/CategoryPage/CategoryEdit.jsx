@@ -29,7 +29,7 @@ class CategoryEdit extends React.Component {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
     }
-    let categoryId = this.props.match.params.id;
+    let categoryId = this.props.category_items;
     axios.get(`${config.apiUrl}/categories/${categoryId}`, {
     headers: headers
   })
@@ -52,79 +52,74 @@ class CategoryEdit extends React.Component {
     axios.put(`${config.apiUrl}/categories`, category, {
     headers: headers
   })
-      .then(response => {
-        this.setState({ locations: response.data });
-        window.location = "/categories"
-      })
+    .then(response => {
+      this.setState({ locations: response.data });
+      window.location = "/categories"
+    })
   }
 
   onSubmit(e){
-
     const category = {
       name: this.refs.name.value,
       id: this.refs.id.value
     }
     this.editCategory(category);
     e.preventDefault();
-
   }
 
   handleInputChange(e){
     const target = e.target;
     const value = target.value;
     const name = target.name;
-
     this.setState({
       [name]: value
     });
   }
 
-    handleChange(event) {
-      const { name, value } = event.target;
-      const { category } = this.state;
-      this.setState({category: event.target.value});
-      this.setState({
-          category: { ...category, [name]: value }
-      });
-    }
+  handleChange(event) {
+    const { name, value } = event.target;
+    const { category } = this.state;
+    this.setState({category: event.target.value});
+    this.setState({
+        category: { ...category, [name]: value }
+    });
+  }
 
-    render() {
-      const { loggingIn} = this.props;
-      const { submitted } = this.state;
-      const current_user = JSON.parse(localStorage.getItem('singleUser'))
+  render() {
+    const { loggingIn} = this.props;
+    const { submitted } = this.state;
+    const current_user = JSON.parse(localStorage.getItem('singleUser'))
 
-      return (
+    return (
+      <div>
         <div>
-          <div>
-            <Header />
-            <div className="container">
-              <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
-                  <center><h2>Edit Category</h2></center><br/>
-                  <div className="form-group">
-                    <label htmlFor="categoryname" className="col-sm-2 control-label">Category Name</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="name" ref="name" value={this.state.name} onChange={this.handleInputChange} />
-                    </div>
+          <div className="container">
+            <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
+              <div className="row model-warehouse">
+                <div className="col-md-12">
+                  <label htmlFor="categoryname" className="label">Category Name</label>
+                  <div>
+                    <input className="form-control" type="text" name="name" ref="name" value={this.state.name} onChange={this.handleInputChange} />
+                  </div><br/>
+                </div>
+                <div className="col-md-6">
+                  <div>
+                    <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <div className="col-sm-3">
-                      <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <div className="col-sm-1 col-sm-offset-2">
-                      <button className="btn btn-primary btn-block">Submit</button>
-                    </div>
-                  </div>
-              
-              </form>
-            </div>
-          </div> 
-        </div>
-      );
-    }
+                </div>
+              </div><br/>  
+              <div className="form-group">
+               <div className="pull-right">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                  <button className="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div> 
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {

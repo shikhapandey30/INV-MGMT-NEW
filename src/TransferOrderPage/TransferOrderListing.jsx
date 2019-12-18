@@ -7,6 +7,7 @@ import { Footer } from '../Footer';
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { NewTransferOrder } from '../TransferOrderPage';
+import Loader from 'react-loader-spinner'
 
 
 class TransferOrderListing extends React.Component {
@@ -48,7 +49,14 @@ class TransferOrderListing extends React.Component {
                 </h1>
               </div>
               <div className="panel filterable">
-                {alltransferorders.loading && <h5 className="loading-msg"><em>Loading All Transfer Orders .....</em></h5>}
+                {alltransferorders.loading && <h5 className="loading-msg"><em> 
+                  <Loader
+                   type="Oval"
+                   color="#00BFFF"
+                   height={100}
+                   width={100}
+                  />
+                </em></h5>}
                 <table className="table table-hover table-responsive">
                   <thead>
                     <tr className="filters">

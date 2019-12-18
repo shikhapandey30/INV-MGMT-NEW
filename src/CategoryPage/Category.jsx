@@ -8,6 +8,7 @@ import config from 'config';
 import { NewCategory } from '../CategoryPage';
 import { Route, Redirect } from 'react-router-dom';
 import { MDBDataTable } from 'mdbreact';
+import Loader from 'react-loader-spinner'
 
 
 class Category extends React.Component {
@@ -91,13 +92,20 @@ class Category extends React.Component {
                   </div>
                 </h1>
               </div>
+              {allcategories.loading && <h5 className="loading-msg"><em> 
+                  <Loader
+                   type="Oval"
+                   color="#00BFFF"
+                   height={100}
+                   width={100}
+                   timeout={1000}
+                  /></em></h5>}
               <div className="panel filterable">
                 <MDBDataTable
                   small
                   hover
                   data={data}
                 />
-                {allcategories.loading && <h5 className="loading-msg"><em>Loading All Categories .....</em></h5>}
               </div>
             </div>
           </div>

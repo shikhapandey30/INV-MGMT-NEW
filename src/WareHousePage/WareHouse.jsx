@@ -47,15 +47,18 @@ class WareHouse extends React.Component {
               </div>
               <div className="panel filterable">
                 <center>
-                  <Loader
-                   type="Puff"
-                   color="#00BFFF"
-                   height={100}
-                   width={100}
-                   timeout={1000}
-                  />
+                  
                 </center>
-                {allwarehouses.loading && <h5 className="loading-msg"><em>Loading All Warehouses .....</em></h5>}
+                {allwarehouses.loading && <h5 className="loading-msg">
+                  <em> 
+                    <Loader
+                     type="Oval"
+                     color="#00BFFF"
+                     height={100}
+                     width={100}
+                     timeout={1000}
+                    />
+                  </em></h5>}
                 <table className="table table-hover table-responsive">
                   <thead>
                     <tr className="filters">

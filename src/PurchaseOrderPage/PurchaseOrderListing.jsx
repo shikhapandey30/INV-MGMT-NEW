@@ -7,6 +7,7 @@ import { Footer } from '../Footer';
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { NewPurchaseOrder } from '../PurchaseOrderPage';
+import Loader from 'react-loader-spinner'
 
 
 class PurchaseOrderListing extends React.Component {
@@ -48,7 +49,14 @@ class PurchaseOrderListing extends React.Component {
                 </h1>
               </div>
               <div className="panel filterable">
-                {allpuchaseorders.loading && <h5 className="loading-msg"><em>Loading All Purchase Orders .....</em></h5>}
+                {allpuchaseorders.loading && <h5 className="loading-msg"><em> 
+                  <Loader
+                   type="Oval"
+                   color="#00BFFF"
+                   height={100}
+                   width={100}
+                  />
+                </em></h5>}
                 <table className="table table-hover table-responsive">
                   <thead>
                     <tr className="filters">

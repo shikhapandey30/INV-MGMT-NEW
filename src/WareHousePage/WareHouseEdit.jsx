@@ -35,7 +35,7 @@ class WareHouseEdit extends React.Component {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
     }
-    let warehouseId = this.props.match.params.id;
+    let warehouseId = this.props.warehouse_id;
     axios.get(`${config.apiUrl}/warehouses/${warehouseId}`, {
     headers: headers
   })
@@ -98,94 +98,95 @@ class WareHouseEdit extends React.Component {
     });
   }
 
-    handleChange(event) {
-      const { name, value } = event.target;
-      const { warehouse } = this.state;
-      this.setState({warehouse: event.target.value});
-      this.setState({
-          warehouse: { ...warehouse, [name]: value }
-      });
-    }
+  handleChange(event) {
+    const { name, value } = event.target;
+    const { warehouse } = this.state;
+    this.setState({warehouse: event.target.value});
+    this.setState({
+        warehouse: { ...warehouse, [name]: value }
+    });
+  }
 
-    render() {
-      const { loggingIn} = this.props;
-      const { submitted } = this.state;
-      const current_user = JSON.parse(localStorage.getItem('singleUser'))
+  render() {
+    const { loggingIn} = this.props;
+    const { submitted } = this.state;
+    const current_user = JSON.parse(localStorage.getItem('singleUser'))
 
-      return (
+    return (
+      <div>
         <div>
-          <div>
-            <Header />
-            <div className="container">
-              <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
-                  <center><h2>Edit And Update WareHouse</h2></center><br/>
-                  <div className="form-group">
-                    <label htmlFor="warehousename" className="col-sm-2 control-label">WareHouse Name</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="name" ref="name" value={this.state.name} onChange={this.handleInputChange} />
-                    </div>
+          <div className="container">
+            <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="warehousename" className="label">WareHouse Name</label>
+                  <div>
+                    <input className="form-control" type="text" name="name" ref="name" value={this.state.name} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="warehousecity" className="col-sm-2 control-label">City</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="city" ref="city" value={this.state.city} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="warehouseaddress" className="label">Address</label>
+                  <div>
+                    <input className="form-control" type="text" name="address" ref="address" value={this.state.address} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="warehousestate" className="col-sm-2 control-label">State</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="state" ref="state" value={this.state.state} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+              </div>
+              <br/>  
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="warehouselandmark" className="label">Landmark</label>
+                  <div>
+                    <input className="form-control" type="text" name="landmark" ref="landmark" value={this.state.landmark} onChange={this.handleInputChange} />
                   </div>
-                  
-                  <div className="form-group">
-                    <label htmlFor="warehouseaddress" className="col-sm-2 control-label">Address</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="address" ref="address" value={this.state.address} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+                
+                <div className="col-md-6">
+                  <label htmlFor="warehousecity" className="label">City</label>
+                  <div>
+                    <input className="form-control" type="text" name="city" ref="city" value={this.state.city} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="warehousecountry" className="col-sm-2 control-label">Country</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="country" ref="country" value={this.state.country} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+              </div>
+               <br/> 
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="warehousezipcode" className="label">Zipcode</label>
+                  <div>
+                    <input className="form-control" type="text" name="zipcode" ref="zipcode" value={this.state.zipcode} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="warehousezipcode" className="col-sm-2 control-label">Zipcode</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="zipcode" ref="zipcode" value={this.state.zipcode} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="warehousestate" className="label">State</label>
+                  <div>
+                    <input className="form-control" type="text" name="state" ref="state" value={this.state.state} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="warehouselandmark" className="col-sm-2 control-label">Landmark</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="landmark" ref="landmark" value={this.state.landmark} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+              </div><br/>
+              <div className="row model-warehouse">
+                <div className="col-md-6">
+                  <label htmlFor="warehousecountry" className="label">Country</label>
+                  <div>
+                    <input className="form-control" type="text" name="country" ref="country" value={this.state.country} onChange={this.handleInputChange} />
+                  </div><br/>
+                </div>
+                <div className="col-md-6">
+                  <div>
+                    <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <div className="col-sm-3">
-                      <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <div className="col-sm-1 col-sm-offset-2">
-                      <button className="btn btn-primary btn-block">Submit</button>
-                    </div>
-                  </div>
-              
-              </form>
-            </div>
-          </div> 
-        </div>
-      );
-    }
+                </div>
+              </div><br/> 
+              <div className="form-group">
+                <div className="pull-right">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                  <button className="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </form> 
+          </div>
+        </div> 
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {

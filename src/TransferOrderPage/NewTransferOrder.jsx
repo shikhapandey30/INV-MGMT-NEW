@@ -92,7 +92,7 @@ class NewTransferOrder extends React.Component {
            <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
               <div className="row">
                 <div className="col-md-6">
-                  <label htmlFor="itemid" className="label">itemid</label>
+                  <label htmlFor="itemid" className="label">Item ID</label>
                   <div>
                     <input type="text" className="form-control" placeholder="Item" name="itemid" id="itemid" value={itemid}  autoFocus />
                   </div>
@@ -140,15 +140,16 @@ class NewTransferOrder extends React.Component {
                     let productId = `product-${idx}`, quantityId = `quantity-${idx}`
                     return (
                       <div key={idx}>
+                        <div className="row">
                           <div className="col-md-6">
-                            <label htmlFor="{productId}" className="label">{`Product #${idx + 1}`}</label>
+                            <label htmlFor="{productId}" className="label" style={{marginLeft: -50}}>{`Product #${idx + 1}`}</label>
                             <div>
                               { allproducts.items && allproducts.items.length > 0 &&
                                 <select vname={productId}
                                   data-id={idx}
                                   id={productId}
                                   value={products_quantity[idx].product}
-                                  className="product" >
+                                  className="product" style={{"height": 34, "width": 270, marginLeft: -50, borderRadius: 4 }} >
                                   {allproducts.items.map((product, index) =>
                                     <option key={index} value={product.id} >
                                       {product.name}
@@ -159,7 +160,7 @@ class NewTransferOrder extends React.Component {
                             </div>  
                           </div>
                           <div className="col-md-6">
-                            <label htmlFor="{quantityId}" className="label">{`Quantity #${idx + 1}`}</label> 
+                            <label htmlFor="{quantityId}" className="label" style={{marginLeft: -22}}>{`Quantity #${idx + 1}`}</label> 
                             <div> 
                               <input
                                 type="text"
@@ -168,16 +169,18 @@ class NewTransferOrder extends React.Component {
                                 id={quantityId}
                                 value={products_quantity[idx].quantity}
                                 className="quantity"
+                                style={{"height": 34, "width": 270, marginLeft: -19}} required="required"
                               />
                             </div>  
-                          </div>  
+                          </div>
+                        </div><br/>    
                       </div>
                     )
                   })
                 }
              </div><br/>
              <center className="model-warehouse">
-               <a className="btn btn-primary" onClick={this.addProductQuantity}>Add New Product</a>
+               <a className="btn btn-primary" onClick={this.addProductQuantity} style={{"color": 'white'}}> <i className="fa fa-plus" aria-hidden="true"></i> Add New Product</a>
               </center>  
               <div className="form-group">
                   <div className="pull-right">

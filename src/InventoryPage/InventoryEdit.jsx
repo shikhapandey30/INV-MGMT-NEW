@@ -41,7 +41,7 @@ class InventoryEdit extends React.Component {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
     }
-    let inventoryId = this.props.match.params.id;
+    let inventoryId = this.props.inventory_id;
     axios.get(`${config.apiUrl}/inventories/${inventoryId}`, {
     headers: headers
   })
@@ -114,148 +114,139 @@ class InventoryEdit extends React.Component {
     });
   }
 
-    handleChange(event) {
-      const { name, value } = event.target;
-      const { inventory } = this.state;
-      this.setState({inventory: event.target.value});
-      this.setState({
-          inventory: { ...inventory, [name]: value }
-      });
-    }
+  handleChange(event) {
+    const { name, value } = event.target;
+    const { inventory } = this.state;
+    this.setState({inventory: event.target.value});
+    this.setState({
+        inventory: { ...inventory, [name]: value }
+    });
+  }
 
-    render() {
-      const { loggingIn, allwarehouses, allproducts} = this.props;
-      const { submitted } = this.state;
-      const current_user = JSON.parse(localStorage.getItem('singleUser'))
+  render() {
+    const { loggingIn, allwarehouses, allproducts} = this.props;
+    const { submitted } = this.state;
+    const current_user = JSON.parse(localStorage.getItem('singleUser'))
 
-      return (
+    return (
+      <div>
         <div>
-          <div>
-            <Header />
-            <div className="container">
-              <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
-                  <center><h2>Edit Inventory</h2></center><br/>
-                  <div className="form-group">
-                    <label htmlFor="inventorybarcode" className="col-sm-2 control-label">Inventory Barcode</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="barcode" ref="barcode" value={this.state.barcode} onChange={this.handleInputChange} />
-                    </div>
+          <div className="container">
+            <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="inventorybarcode" className="label">Inventory Barcode</label>
+                  <div>
+                    <input className="form-control" type="text" name="barcode" ref="barcode" value={this.state.barcode} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventorybatch" className="col-sm-2 control-label">Inventory Batch</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="batch" ref="batch" value={this.state.batch} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="inventorybatch" className="label">Inventory Batch</label>
+                  <div>
+                    <input className="form-control" type="text" name="batch" ref="batch" value={this.state.batch} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventoryexpiryDate" className="col-sm-2 control-label">Inventory Expiry Date</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="expiryDate" ref="expiryDate" value={this.state.expiryDate} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+              </div><br/>  
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="inventoryexpiryDate" className="label">Inventory Expiry Date</label>
+                  <div>
+                    <input className="form-control" type="text" name="expiryDate" ref="expiryDate" value={this.state.expiryDate} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventorymrpCost" className="col-sm-2 control-label">Inventory MRP Cost</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="mrpCost" ref="mrpCost" value={this.state.mrpCost} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="inventorymrpCost" className="label">Inventory MRP Cost</label>
+                  <div>
+                    <input className="form-control" type="text" name="mrpCost" ref="mrpCost" value={this.state.mrpCost} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventoryproduct" className="col-sm-2 control-label">Inventory Product</label>
-                    <div className="col-sm-3">
-                      { allproducts.items && allproducts.items.length > 0 &&
-                        <select name="product" ref="product" value={this.state.product.id} onChange={this.handleInputChange} className="form-control select-field" >
-                          {allproducts.items.map((product, index) =>
-                            <option key={index} value={this.state.product.id} >
-                              {product.name}
-                            </option>
-                           
-                          )}
-                        </select>
-                      }
-                    </div>
+                </div>
+              </div><br/>  
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="inventoryproduct" className="label">Inventory Product</label>
+                  <div>
+                    { allproducts.items && allproducts.items.length > 0 &&
+                      <select name="product" ref="product" value={this.state.product.id} onChange={this.handleInputChange} className="form-control select-field" >
+                        {allproducts.items.map((product, index) =>
+                          <option key={index} value={this.state.product.id} >
+                            {product.name}
+                          </option>
+                         
+                        )}
+                      </select>
+                    }
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventorypurchaseCost" className="col-sm-2 control-label">Inventory Purchase Cost</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="purchaseCost" ref="purchaseCost" value={this.state.purchaseCost} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="inventorypurchaseCost" className="label">Inventory Purchase Cost</label>
+                  <div>
+                    <input className="form-control" type="text" name="purchaseCost" ref="purchaseCost" value={this.state.purchaseCost} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventoryquantity" className="col-sm-2 control-label">Inventory Quantity</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="quantity" ref="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+              </div><br/>  
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="inventoryquantity" className="label">Inventory Quantity</label>
+                  <div>
+                    <input className="form-control" type="text" name="quantity" ref="quantity" value={this.state.quantity} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventoryreferenceNumber" className="col-sm-2 control-label">Inventory Reference Number</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="referenceNumber" ref="referenceNumber" value={this.state.referenceNumber} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="inventoryreferenceNumber" className="label">Inventory Reference Number</label>
+                  <div>
+                    <input className="form-control" type="text" name="referenceNumber" ref="referenceNumber" value={this.state.referenceNumber} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventoryremark" className="col-sm-2 control-label">Inventory Remark</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="remark" ref="remark" value={this.state.remark} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+              </div><br/>  
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="inventoryremark" className="label">Inventory Remark</label>
+                  <div>
+                    <input className="form-control" type="text" name="remark" ref="remark" value={this.state.remark} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventorysalesCost" className="col-sm-2 control-label">Inventory Sales Cost</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="salesCost" ref="salesCost" value={this.state.salesCost} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="inventorysalesCost" className="label">Inventory Sales Cost</label>
+                  <div>
+                    <input className="form-control" type="text" name="salesCost" ref="salesCost" value={this.state.salesCost} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventoryspecialCost" className="col-sm-2 control-label">Inventory Special Cost</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="specialCost" ref="specialCost" value={this.state.specialCost} onChange={this.handleInputChange} />
-                    </div>
+                </div>
+              </div><br/>  
+              <div className="row model-warehouse">
+                <div className="col-md-6">
+                  <label htmlFor="inventoryspecialCost" className="label">Inventory Special Cost</label>
+                  <div>
+                    <input className="form-control" type="text" name="specialCost" ref="specialCost" value={this.state.specialCost} onChange={this.handleInputChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="inventorywarehouse" className="col-sm-2 control-label">Inventory Warehouse</label>
-                    <div className="col-sm-3">
-                      { allwarehouses.items && allwarehouses.items.length > 0 &&
-                        <select name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} className="form-control select-field" >
-                          {allwarehouses.items.map((warehouse, index) =>
-                            <option key={index} value={this.state.warehouse.id} >
-                              {warehouse.name}
-                            </option>
-                          )}
-                        </select>
-                      }
-
-                    </div>
-                  </div>
-
-
-                  <div className="form-group">
-                    <div className="col-sm-3">
-                      <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <div className="col-sm-1 col-sm-offset-2">
-                      <button className="btn btn-primary btn-block">Submit</button>
-                    </div>
-                  </div>
-              
-              </form>
-            </div>
-          </div> 
-        </div>
-      );
-    }
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="inventorywarehouse" className="label">Inventory Warehouse</label>
+                  <div>
+                    { allwarehouses.items && allwarehouses.items.length > 0 &&
+                      <select name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} className="form-control select-field" >
+                        {allwarehouses.items.map((warehouse, index) =>
+                          <option key={index} value={this.state.warehouse.id} >
+                            {warehouse.name}
+                          </option>
+                        )}
+                      </select>
+                    }
+                  </div><br/>
+                </div>
+              </div><br/>  
+              <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
+              <div className="form-group">
+                <div className="pull-right">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                  <button className="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div> 
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {

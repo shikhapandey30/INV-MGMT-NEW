@@ -26,13 +26,15 @@ class PurchaseOrderEdit extends React.Component {
 
   componentWillMount(){
     this.getPurchaseOrderDetails();
+    this.props.dispatch(userActions.getAllwarehouse());
+    this.props.dispatch(userActions.getAllvendor());
   }
   getPurchaseOrderDetails(){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
     }
-    let purchaseorderId = this.props.match.params.id;
+    let purchaseorderId = this.props.purchaseorder_id;
     axios.get(`${config.apiUrl}/purchase_orders/${purchaseorderId}`, {
     headers: headers
   })
@@ -55,14 +57,14 @@ class PurchaseOrderEdit extends React.Component {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
     }
-    var purchaseorders = {id: purchaseorder.id, status: purchaseorder.status, items: [{id: purchaseorder.items}], vendor: {id: purchaseorder.vendor}, warehouse: {id: purchaseorder.warehouse}}
+    var purchaseorders = {id: purchaseorder.id, status: purchaseorder.status, items: [], vendor: {id: purchaseorder.vendor}, warehouse: {id: purchaseorder.warehouse}}
     axios.put(`${config.apiUrl}/purchase_orders`, purchaseorders, {
     headers: headers
   })
-      .then(response => {
-        this.setState({ locations: response.data });
-        window.location = "/purchase_orders"
-      })
+    .then(response => {
+      this.setState({ locations: response.data });
+      window.location = "/purchase-orders"
+    })
   }
 
   onSubmit(e){
@@ -99,58 +101,69 @@ class PurchaseOrderEdit extends React.Component {
     }
 
     render() {
-      const { loggingIn} = this.props;
+      const { loggingIn, allwarehouses,allvendors} = this.props;
       const { submitted } = this.state;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
 
       return (
         <div>
           <div>
-            <Header />
             <div className="container">
               <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
-                  <center><h2>Edit Purchase Order</h2></center><br/>
-                  <div className="form-group">
-                    <label htmlFor="warehouse" className="col-sm-2 control-label">Warehouse</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} />
+                <div className="row">
+                  <div className="col-md-6">
+                    <label htmlFor="warehouse" className="label">Warehouse</label>
+                    <div>
+                      { allwarehouses.items && allwarehouses.items.length > 0 &&
+                        <select name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} className="form-control select-field" >
+                          {allwarehouses.items.map((warehouse, index) =>
+                            <option key={index} value={warehouse.id} >
+                              {warehouse.name}
+                            </option>
+                          )}
+                        </select>
+                      }
                     </div>
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="status" className="col-sm-2 control-label">Status</label>
-                    <div className="col-sm-3">
+                  <div className="col-md-6">
+                    <label htmlFor="status" className="label">Status</label>
+                    <div>
                       <input className="form-control" type="text" name="status" ref="status" value={this.state.status} onChange={this.handleInputChange} />
                     </div>
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="items" className="col-sm-2 control-label">Items</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="items" ref="items" value={this.state.items} onChange={this.handleInputChange} />
+                </div><br/>  
+                <div className="row model-warehouse">
+                  <div className="col-md-6">
+                    <label htmlFor="items" className="label">Items</label>
+                    <div>
+                      <input className="form-control" type="text" name="items" ref="items" value={this.state.items.id} onChange={this.handleInputChange} />
                     </div>
                   </div>
+                  <div className="col-md-6">
+                    <label htmlFor="vendor" className="label">Vendor</label>
+                    <div>
 
-                  <div className="form-group">
-                    <label htmlFor="vendor" className="col-sm-2 control-label">Vendor</label>
-                    <div className="col-sm-3">
-                      <input className="form-control" type="text" name="vendor" ref="vendor" value={this.state.vendor.id} onChange={this.handleInputChange} />
-                    </div>
-                  </div>
+                    { allvendors.items && allvendors.items.length > 0 &&
+                      <select name="vendor" ref="vendor" value={this.state.vendor.id}  onChange={this.handleInputChange}  className="form-control select-field" >
+                        {allvendors.items.map((vendor, index) =>
+                          <option key={index} value={vendor.id} >
+                            {vendor.name}
+                          </option>
+                        )}
+                      </select>
+                    }
 
-                  <div className="form-group">
-                    <div className="col-sm-3">
-                      <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
-                    </div>
+                    </div><br/>
                   </div>
-
-                  <div className="form-group">
-                    <div className="col-sm-1 col-sm-offset-2">
-                      <button className="btn btn-primary btn-block">Submit</button>
-                    </div>
+                </div><br/>  
+                <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
+                <div className="form-group">
+                  <div className="pull-right">
+                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                    <button className="btn btn-primary">Submit</button>
                   </div>
-              
-              </form>
+                </div>
+              </form> 
             </div>
           </div> 
         </div>
@@ -159,10 +172,12 @@ class PurchaseOrderEdit extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const {purchaseorderid, authentication } = state;
+  const {purchaseorderid, allwarehouses, allvendors, authentication } = state;
   const { user } = authentication;
   return {
-    user
+    user,
+    allwarehouses,
+    allvendors
   };
 }
 
