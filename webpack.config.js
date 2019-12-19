@@ -24,8 +24,8 @@ module.exports = {
     })],
     devServer: {
         historyApiFallback: true,
-       https: false,
-       host: "0.0.0.0",
+       https: true,
+       host: "https://ls-inv-mgt.herokuapp.com/",
        proxy: {
       '/internal': 'http://localhost:8084'
         }      
