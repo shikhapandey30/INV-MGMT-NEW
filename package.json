@@ -8,7 +8,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --open",
-    "heroku-postbuild": "heroku-nextjs-build"
+    "heroku-prebuild": "npm install --dev"
   },
   "dependencies": {
     "@ashvin27/react-datatable": "^1.1.10",
