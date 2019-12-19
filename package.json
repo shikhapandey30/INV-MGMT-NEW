@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --open",
-    "heroku-prebuild": "npm install --dev"
+    "heroku-prebuild": "npm install --dev",
+    "start": "webpack-dev-server -d --config webpack.dev.config.js --content-base public/ --progress --colors"
   },
   "dependencies": {
     "@ashvin27/react-datatable": "^1.1.10",
