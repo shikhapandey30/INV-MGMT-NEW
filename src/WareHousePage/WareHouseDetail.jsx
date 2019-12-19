@@ -51,15 +51,16 @@ class WareHouseDetail extends React.Component {
           <div className="container">
             <div>
               <div className="page-header">
-                <center className="loading-msg"> 
-                  <Loader
-                   type="Oval"
-                   color="#00BFFF"
-                   height={100}
-                   width={100}
-                   timeout={700}
-                  />
-                </center>
+                {warehouse.loading && <h5 className="loading-msg">
+                  <em> 
+                    <Loader
+                     type="Oval"
+                     color="#00BFFF"
+                     height={100}
+                     width={100}
+                    />
+                  </em></h5>
+                }
                 { warehouse.items && 
                   <h1 className="page-title">
                   <button type="button" className="btn btn-primary back-btn" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back

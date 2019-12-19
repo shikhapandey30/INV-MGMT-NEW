@@ -133,15 +133,16 @@ class TransferOrderDetail extends React.Component {
           <div className="container">
             <div>
               <div className="page-header">
-                  <center className="loading-msg"> 
-                    <Loader
-                     type="Oval"
-                     color="#00BFFF"
-                     height={100}
-                     width={100}
-                     timeout={500}
-                    />
-                  </center>
+                  {transferorder.loading && <h5 className="loading-msg">
+                    <em> 
+                      <Loader
+                       type="Oval"
+                       color="#00BFFF"
+                       height={100}
+                       width={100}
+                      />
+                    </em></h5>
+                  }
                   { transferorder.items && 
                     <h1 className="page-title">
                       <button type="button" className="btn btn-primary" onClick={this.goBack}><i className="fa fa-arrow-left" aria-hidden="true"></i> Back
@@ -261,16 +262,15 @@ class TransferOrderDetail extends React.Component {
                           <div className="col-md-6">
                             <label htmlFor="destinationWarehouse" className="label">destinationWarehouse</label>
                             <div>
-
                               { allwarehouses.items && allwarehouses.items.length > 0 &&
-                              <select name="destinationWarehouse" ref="destinationWarehouse" value={this.state.destinationWarehouse} onChange={this.handleInputChange} className="form-control select-field" >
-                                {allwarehouses.items.map((warehouse, index) =>
-                                  <option key={index} value={warehouse.id} >
-                                    {warehouse.name}
-                                  </option>
-                                )}
-                              </select>
-                            }
+                                <select name="destinationWarehouse" ref="destinationWarehouse" value={this.state.destinationWarehouse} onChange={this.handleInputChange} className="form-control select-field" >
+                                  {allwarehouses.items.map((warehouse, index) =>
+                                    <option key={index} value={warehouse.id} >
+                                      {warehouse.name}
+                                    </option>
+                                  )}
+                                </select>
+                              }
                             </div>
                           </div>
                           <div className="col-md-6">
