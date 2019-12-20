@@ -6,8 +6,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "build": "webpack --mode production",
     "eject": "react-scripts eject",
     "heroku-prebuild": "npm install --dev"
   },
