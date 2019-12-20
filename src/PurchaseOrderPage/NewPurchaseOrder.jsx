@@ -69,6 +69,8 @@ class NewPurchaseOrder extends React.Component {
       .then(response => {
         this.setState({ locations: response.data });
         window.location = "/purchase-orders"
+        let po_id = response.data.data.id;
+        window.location = `/purchase-order/${po_id}`
       })
     }
 

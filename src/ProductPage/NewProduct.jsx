@@ -77,7 +77,8 @@ class NewProduct extends React.Component {
       })
       .then(response => {
         this.setState({ locations: response.data });
-        window.location = "/products"
+        let product_id = response.data.data.id;
+        window.location = `/product/${product_id}`
       })
     }
 

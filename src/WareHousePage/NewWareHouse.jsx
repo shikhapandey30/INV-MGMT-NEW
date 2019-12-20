@@ -87,7 +87,8 @@ class NewWareHouse extends React.Component {
       })
       .then(response => {
         this.setState({ locations: response.data });
-        window.location = "/warehouses"
+        let warehouse_id = response.data.data.id;
+        window.location = `/warehouse/${warehouse_id}`
       })
     }
 

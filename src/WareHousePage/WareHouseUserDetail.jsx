@@ -227,7 +227,7 @@ class WareHouseUserDetail extends React.Component {
               <div className="modal-box" role="document">
                 <div className="modal-content">
                   <div className="modal-header textdesign">
-                    <p style={{ fontWeight: 'bold' }}>Edit</p>
+                    <p style={{ fontWeight: 'bold' }}>{this.state.userName}</p>
                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -237,7 +237,7 @@ class WareHouseUserDetail extends React.Component {
 
                       <div className="row">
                         <div className="col-md-6">
-                         <label htmlFor="categoryname" className="label">userName</label>
+                         <label htmlFor="categoryname" className="label">User Email</label>
                           <div>
                             <input className="form-control" type="text" name="userName" ref="userName" value={this.state.userName} onChange={this.handleInputChange} />
                           </div>
@@ -245,7 +245,7 @@ class WareHouseUserDetail extends React.Component {
                         <div className="col-md-6">
                           <label htmlFor="categorynamepassword" className="label">Password</label>
                           <div>
-                            <input className="form-control" type="text" name="password" ref="password" value={this.state.password} onChange={this.handleInputChange} />
+                            <input className="form-control" type="password" name="password" ref="password" value={this.state.password} onChange={this.handleInputChange} />
                           </div>
                         </div>
                       </div>

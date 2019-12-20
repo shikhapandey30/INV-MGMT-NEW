@@ -47,7 +47,8 @@ class NewCategory extends React.Component {
       })
       .then(response => {
         this.setState({ locations: response.data });
-        window.location = "/categories"
+        let category_id = response.data.data.id;
+        window.location = `/category/${category_id}`
       })
     }
 
