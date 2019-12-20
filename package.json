@@ -4,10 +4,10 @@
   "repository": {
     "type": "git"
   },
+  "license": "MIT",
   "scripts": {
-    "start": "node server.js",
     "build": "webpack --mode production",
-    "eject": "react-scripts eject",
+    "start": "webpack-dev-server --open",
     "heroku-prebuild": "npm install --dev"
   },
   "dependencies": {
