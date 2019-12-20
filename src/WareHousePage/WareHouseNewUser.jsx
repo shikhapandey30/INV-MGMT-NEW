@@ -54,8 +54,8 @@ class WareHouseNewUser extends React.Component {
         console.log(res);
         console.log(res.data);
         let warehouse_id = res.data.data.warehouse.id;
-        debugger
-        window.location = `/warehouse/${warehouse_id}/users`
+        let user_id = res.data.data.id;
+        window.location = `/warehouses/${warehouse_id}/users/${user_id}`
       })
     }
 
