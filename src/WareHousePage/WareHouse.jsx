@@ -46,19 +46,6 @@ class WareHouse extends React.Component {
                 </h1>
               </div>
               <div className="panel filterable">
-                <center>
-                  
-                </center>
-                {allwarehouses.loading && <h5 className="loading-msg">
-                  <em> 
-                    <Loader
-                     type="Oval"
-                     color="#00BFFF"
-                     height={100}
-                     width={100}
-                     timeout={1000}
-                    />
-                  </em></h5>}
                 <table className="table table-hover table-responsive">
                   <thead>
                     <tr className="filters">
@@ -73,7 +60,16 @@ class WareHouse extends React.Component {
                       <th>Created At</th>
                     </tr>  
                   </thead>
-                  
+                    {allwarehouses.loading && <h5 className="loading-msg
+                    ">
+                    <em>
+                        <Loader
+                         type="Oval"
+                         color="#00BFFF"
+                         height={70}
+                         width={70}
+                        />
+                    </em></h5>}
                   { allwarehouses.items && allwarehouses.items.length > 0 &&
                     <tbody>
                     {allwarehouses.items.map((warehouse, index) =>
