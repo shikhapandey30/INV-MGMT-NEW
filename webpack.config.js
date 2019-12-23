@@ -24,7 +24,7 @@ module.exports = {
     })],
     devServer: {
         historyApiFallback: true,
-       https: true,
+       https: false,
        host: "0.0.0.0",
        proxy: {
       '/internal': 'http://localhost:8084'
