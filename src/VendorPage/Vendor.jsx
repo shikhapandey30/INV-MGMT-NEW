@@ -51,9 +51,8 @@ class Vendor extends React.Component {
                   <Loader
                    type="Oval"
                    color="#00BFFF"
-                   height={100}
-                   width={100}
-                   timeout={1000}
+                   height={70}
+                   width={70}
                   />
                 </em></h5>}
                 <table className="table table-hover">

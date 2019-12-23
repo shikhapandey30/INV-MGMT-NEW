@@ -151,7 +151,7 @@ class InventoryEdit extends React.Component {
                 <div className="col-md-6">
                   <label htmlFor="inventoryexpiryDate" className="label">Inventory Expiry Date</label>
                   <div>
-                    <input className="form-control" type="text" name="expiryDate" ref="expiryDate" value={this.state.expiryDate} onChange={this.handleInputChange} />
+                    <input className="form-control" type="date" name="expiryDate" ref="expiryDate" value={this.state.expiryDate} onChange={this.handleInputChange} />
                   </div>
                 </div>
                 <div className="col-md-6">

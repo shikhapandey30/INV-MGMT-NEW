@@ -105,9 +105,8 @@ class Inventory extends React.Component {
                         <Loader
                          type="Oval"
                          color="#00BFFF"
-                         height={100}
-                         width={100}
-                         timeout={1000}
+                         height={70}
+                         width={70}
                         /></em></h5>}
                         { allproducts.items && allproducts.items.length > 0 &&
                           <select value={filterinventory.product} onChange={this.handleChange} name="product" className="form-control select-field" >

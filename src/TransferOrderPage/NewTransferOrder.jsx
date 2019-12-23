@@ -65,7 +65,8 @@ class NewTransferOrder extends React.Component {
       })
       .then(response => {
         this.setState({ locations: response.data });
-        window.location = "/transfer-orders"
+        let to_id = response.data.data.id;
+        window.location = `/transfer-order/${to_id}`
       })
     }
 
@@ -163,7 +164,7 @@ class NewTransferOrder extends React.Component {
                             <label htmlFor="{quantityId}" className="label" style={{marginLeft: -22}}>{`Quantity #${idx + 1}`}</label> 
                             <div> 
                               <input
-                                type="text"
+                                type="number"
                                 name={quantityId}
                                 data-id={idx}
                                 id={quantityId}
