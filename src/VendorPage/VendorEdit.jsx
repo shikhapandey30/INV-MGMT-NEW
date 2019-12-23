@@ -66,7 +66,8 @@ class VendorEdit extends React.Component {
   })
       .then(response => {
         this.setState({ locations: response.data });
-        window.location = "/vendors"
+        let vendor_id = response.data.data.id;
+        window.location = `/vendor/${vendor_id}`
       })
   }
 

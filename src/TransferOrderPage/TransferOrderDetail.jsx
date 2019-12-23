@@ -66,7 +66,8 @@ class TransferOrderDetail extends React.Component {
     })
       .then(response => {
         this.setState({ locations: response.data });
-        window.location = "/transfer-orders"
+        let to_id = response.data.data.id;
+        window.location = `/transfer-order/${to_id}`
       })
     }
 

@@ -78,7 +78,8 @@ class InventoryEdit extends React.Component {
   })
       .then(response => {
         this.setState({ locations: response.data });
-        window.location = "/inventories"
+        let inventory_id = response.data.data.id;
+        window.location = `/inventory/${inventory_id}`
       })
   }
 
